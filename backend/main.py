@@ -6,8 +6,6 @@ Secure, AI-powered Personal Health Companion Backend
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
 from dotenv import load_dotenv
 
 from .routers import sensors, health, disaster, emergency, simulation
@@ -88,14 +86,6 @@ async def root_api_status():
             "It is not a medical diagnostic device and does not replace professional medical advice or emergency services."
         )
     }
-
-
-# Mount Built React Frontend if dist exists
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FRONTEND_DIST = os.path.join(BASE_DIR, "frontend", "dist")
-
-if os.path.exists(FRONTEND_DIST):
-    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 
 
 if __name__ == "__main__":
