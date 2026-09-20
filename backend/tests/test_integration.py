@@ -6,7 +6,7 @@ client = TestClient(app)
 
 
 def test_root_endpoint():
-    res = client.get("/")
+    res = client.get("/api")
     assert res.status_code == 200
     data = res.json()
     assert data["app_name"] == "SwastyaConnect"
